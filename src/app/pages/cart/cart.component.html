@@ -49,7 +49,7 @@
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>
-        <button mat-raised-button color="warn" class="float-right">
+        <button (click)="onClearCart()" mat-raised-button color="warn" class="float-right">
           Clear All
         </button>
       </th>
