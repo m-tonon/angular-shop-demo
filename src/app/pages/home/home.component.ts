@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   sort = 'desc';
   count = '12';
   productsSubscription: Subscription | undefined;
+  
+  navOpen: boolean = false;
+  navColsChanged: boolean = false;
 
   constructor (
     private cartService: CartService,
@@ -62,6 +65,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   onSortChange(newSort: string): void {
     this.sort = newSort;
     this.getProducts();
+  }
+
+  onSidebarOpen() {
+    this.navOpen = !this.navOpen;
+    this.navColsChanged = !this.navColsChanged;
+    if (this.navColsChanged) {
+      this.cols = 1;
+    } else {
+      this.cols = 3;
+    }
   }
 
   ngOnDestroy(): void {

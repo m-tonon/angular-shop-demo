@@ -2,9 +2,17 @@
   [autosize]="true"
   class="min-h-full max-w-7x1 mx-auto border-x">
   
-  <mat-drawer mode="side" opened class="p-6">
-    <app-filters (showCategory)="onShowCategory($event)"></app-filters>
+  <mat-drawer mode="side" opened class="p-2">
+    <ng-container>
+      <button (click)="onSidebarOpen()" mat-icon-button>
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </ng-container >
+    <ng-container *ngIf="navOpen">
+      <app-filters (showCategory)="onShowCategory($event)"></app-filters>
+    </ng-container>
   </mat-drawer>
+
   <mat-drawer-content class="p-6">
     <app-products-header 
     (columnsCountChange)="onColumnsCountChange($event)" 
