@@ -13,6 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +26,8 @@ import { FiltersComponent } from './pages/home/components/filters/filters.compon
 import { ProductBoxComponent } from './pages/home/components/product-box/product-box.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './pages/auth/auth.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,12 +38,14 @@ import { HttpClientModule } from '@angular/common/http';
     FiltersComponent,
     ProductBoxComponent,
     CartComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatGridListModule,
     MatMenuModule,
@@ -52,6 +58,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatBadgeModule,
     MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],
