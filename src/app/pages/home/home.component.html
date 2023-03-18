@@ -2,16 +2,21 @@
   [autosize]="true"
   class="min-h-full max-w-7x1 mx-auto border-x">
   
-  <mat-drawer mode="side" opened class="p-2">
-    <ng-container>
+  <mat-drawer mode="side" opened class="p-2" disableClose>
+    <div class="flex justify-between">
       <button (click)="onSidebarOpen()" mat-icon-button>
-        <mat-icon>filter_list</mat-icon>
+        <mat-icon *ngIf="navOpen">menu</mat-icon>
+        <mat-icon *ngIf="!navOpen">last_page</mat-icon>
       </button>
-    </ng-container >
+      <button *ngIf="navOpen" (click)="onSidebarClose()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
     <ng-container *ngIf="navOpen">
       <app-filters (showCategory)="onShowCategory($event)"></app-filters>
     </ng-container>
   </mat-drawer>
+
 
   <mat-drawer-content class="p-6">
     <app-products-header 
