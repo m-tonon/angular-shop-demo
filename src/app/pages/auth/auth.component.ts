@@ -17,13 +17,15 @@ export class AuthComponent implements OnInit {
   });
  }
 
- onSubmit(): void {
-  if (!this.authForm.valid) {
+ onSubmit(form: FormGroup): void {
+  if (!form.valid) {
     return
   }
-  const email = this.authForm.value.email;
-  const password = this.authForm.value.password;
+  const email = form.value.email;
+  const password = form.value.password;
 
-  console.log(this.authForm);
+  console.log(form);
+  
+  form.reset();
  }
 }

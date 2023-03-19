@@ -1,7 +1,7 @@
 <mat-card class="max-w-7x1 mx-auto">
   <mat-card-title>Login</mat-card-title>
   <mat-card-content class="max-w-5x1 mx-auto">
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm)">
       <p>
         <mat-form-field>
           <input
