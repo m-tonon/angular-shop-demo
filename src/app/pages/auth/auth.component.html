@@ -1,26 +1,38 @@
 <mat-card class="max-w-7x1 mx-auto">
   <mat-card-title>Login</mat-card-title>
-  <mat-card-content class="max-w-7x1 mx-auto">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-<p>
-  <mat-form-field>
-    <input type="text" matInput placeholder="Username" formControlName="username">
-  </mat-form-field>
-</p>
-<p>
-  <mat-form-field>
-    <input type="password" matInput placeholder="Password" formControlName="password">
-  </mat-form-field>
-</p>
-
-<!-- <p *ngIf="error" class="error">
-  {{ error }}
-</p> -->
-
-<div class="button">
-  <button type="submit" mat-button>Login</button>
-</div>
-
-</form>
-</mat-card-content>
+  <mat-card-content class="max-w-5x1 mx-auto">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field>
+          <input
+            type="email"
+            name="email"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+          />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            minlength="4"
+          />
+        </mat-form-field>
+      </p>
+      <p *ngIf="!authForm.valid && authForm.get('email')?.touched" >
+        Please enter a valid email!
+      </p>
+      <p *ngIf="!authForm.valid && authForm.get('password')?.touched" >
+        Please enter a valid password!
+      </p>
+      <div class="button">
+        <button type="submit" mat-button>Login</button>
+      </div>
+    </form>
+  </mat-card-content>
 </mat-card>

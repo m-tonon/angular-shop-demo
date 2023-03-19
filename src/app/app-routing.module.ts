@@ -13,7 +13,7 @@ const routes: Routes = [{
   component: CartComponent
 },
 {
-  path: 'auth',
+  path: 'login',
   component: AuthComponent
 },
 {
