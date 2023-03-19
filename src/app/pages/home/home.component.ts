@@ -8,7 +8,8 @@ const ROWS_HEIGHT: { [id:number]: number } = { 1: 400, 3: 335, 4: 350 }
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
   cols = 3;
@@ -20,7 +21,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   productsSubscription: Subscription | undefined;
   
   navOpen: boolean = false;
-  navColsChanged: boolean = false;
 
   constructor (
     private cartService: CartService,
@@ -68,13 +68,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onSidebarOpen() {
-    this.navOpen = !this.navOpen;
-    this.navColsChanged = !this.navColsChanged;
-    if (this.navColsChanged) {
-      this.cols = 1;
-    } else {
-      this.cols = 3;
-    }
+    this.navOpen = true;
+    this.cols = 1;
+  }
+
+  onSidebarClose() {
+    this.navOpen = false;
+    this.cols = 3;
   }
 
   ngOnDestroy(): void {
