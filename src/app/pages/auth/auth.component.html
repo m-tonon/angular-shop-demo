@@ -1,5 +1,5 @@
 <mat-card class="max-w-7x1 mx-auto">
-  <mat-card-title>Login</mat-card-title>
+  <mat-card-title>{{ isLoginMode ? 'Login' : 'Signup'}}</mat-card-title>
   <mat-card-content class="max-w-5x1 mx-auto">
     <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm)">
       <p>
@@ -30,8 +30,21 @@
       <p *ngIf="!authForm.valid && authForm.get('password')?.touched" >
         Please enter a valid password!
       </p>
-      <div class="button">
-        <button type="submit" mat-button>Login</button>
+      <div class="">
+        <div>
+          <button 
+            type="submit"
+            [disabled]="!authForm.valid"
+            mat-raised-button	color="primary">{{ isLoginMode ? 'Login' : 'Signup'}}
+          </button>
+        </div>
+        <div>
+          <button 
+            type="button"
+            (click)="onSwitchMode()"
+            mat-button>{{ isLoginMode ? 'Create an account' : 'I already have an account'}}
+          </button>
+        </div>
       </div>
     </form>
   </mat-card-content>
