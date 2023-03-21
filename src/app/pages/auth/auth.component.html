@@ -45,6 +45,7 @@
             mat-button>{{ isLoginMode ? 'Create an account' : 'I already have an account'}}
           </button>
         </div>
+        <p *ngIf="error" class="error ">{{this.error}}</p>
       </div>
     </form>
   </mat-card-content>

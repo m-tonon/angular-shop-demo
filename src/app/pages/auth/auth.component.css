@@ -16,10 +16,10 @@ mat-card-content {
 }
 
 .error {
-  padding: 16px;
-  width: 300px;
-  color: white;
-  background-color: red;
+  padding: 14px;
+  width: auto;
+  color: rgb(0, 0, 0);
+  background-color: rgb(240, 132, 132);
 }
 
 .button {
