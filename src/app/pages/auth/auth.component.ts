@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { AuthService, AuthResponseData } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -12,7 +15,9 @@ export class AuthComponent implements OnInit {
   isLoginMode = false;
   error?: string ;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router) {}
 
  ngOnInit(): void {
   this.authForm = new FormGroup({
@@ -32,18 +37,24 @@ export class AuthComponent implements OnInit {
   const email = form.value.email;
   const password = form.value.password;
 
+  let authObs: Observable<AuthResponseData>;
+
   if(this.isLoginMode) {
-    //...
+    authObs = this.authService.login(email, password);
   } else {
-    this.authService.signup(email, password).subscribe(
-      resData => {
-        console.log(resData);
-      }, errorMessage => {
-        console.log(errorMessage);
-        this.error = errorMessage;
+    authObs = this.authService.signup(email, password)
+  }
+  
+  authObs.subscribe({
+    next: (resData) => {
+      console.log(resData)
+      this.router.navigate(['/']);
+    },
+    error: (errorMessage) => {
+      console.log(errorMessage),
+      this.error = errorMessage}
       }
     )
-  }
   
   form.reset();
  }
