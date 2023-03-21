@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService, AuthResponseData } from './auth.service';
@@ -14,7 +15,9 @@ export class AuthComponent implements OnInit {
   isLoginMode = false;
   error?: string ;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router) {}
 
  ngOnInit(): void {
   this.authForm = new FormGroup({
@@ -43,7 +46,10 @@ export class AuthComponent implements OnInit {
   }
   
   authObs.subscribe({
-    next: (resData) => console.log(resData),
+    next: (resData) => {
+      console.log(resData)
+      this.router.navigate(['/']);
+    },
     error: (errorMessage) => {
       console.log(errorMessage),
       this.error = errorMessage}
