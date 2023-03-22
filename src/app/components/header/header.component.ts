@@ -1,14 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Cart, CartItem } from 'src/app/models/cart.model';
+import { AuthService } from 'src/app/pages/auth/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   private _cart: Cart = { items: [] };
   itemsQuantity = 0;
+  isAuthenticated = false;
+  private userSub!: Subscription;
   
   @Input()
   get cart(): Cart {
@@ -23,7 +27,15 @@ export class HeaderComponent {
       reduce((prev, curr) => prev + curr, 0);
   }
 
-  constructor (private cartService: CartService) {}
+  constructor (
+    private cartService: CartService,
+    private authService: AuthService) {}
+  
+  ngOnInit(): void {
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!user;
+    })
+  }
 
   getTotal(items: Array<CartItem>): number {
     return this.cartService.getTotal(items);
@@ -31,5 +43,9 @@ export class HeaderComponent {
 
   onClearCart(): void {
     this.cartService.clearCart();
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
   }
 }
