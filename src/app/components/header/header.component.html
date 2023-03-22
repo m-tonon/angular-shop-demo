@@ -11,10 +11,10 @@
         matBadgeColor="warn"
       >shopping_cart</mat-icon>
     </button>
-    <a routerLink="login" mat-icon-button>
+    <a *ngIf="!isAuthenticated" routerLink="login" mat-icon-button>
       <mat-icon>account_circle</mat-icon>
     </a>
-    <a routerLink="/" mat-icon-button>
+    <a *ngIf="isAuthenticated" routerLink="/login" mat-icon-button>
       <mat-icon>logout</mat-icon>
     </a>
   </div>
