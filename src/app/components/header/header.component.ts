@@ -37,6 +37,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     })
   }
 
+  onLogout() {
+    this.authService.user.unsubscribe();
+    this.isAuthenticated = false;
+    console.log(this.authService.user);
+  }
+
   getTotal(items: Array<CartItem>): number {
     return this.cartService.getTotal(items);
   }

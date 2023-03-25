@@ -12,7 +12,7 @@ import { AuthService, AuthResponseData } from './auth.service';
 })
 export class AuthComponent implements OnInit {
   authForm!: FormGroup;
-  isLoginMode = false;
+  isLoginMode = true;
   error?: string ;
 
   constructor(
